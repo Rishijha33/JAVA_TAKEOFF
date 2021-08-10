@@ -8,10 +8,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.air.appl.beans.User;
 
-@Repository("userDao") 		
+@Repository("userDao") 	
+@EnableTransactionManagement
 public class UserDaoImpl implements UserDao{
 	
 	@PersistenceContext
@@ -23,6 +26,26 @@ public class UserDaoImpl implements UserDao{
 		Query q = em.createQuery(sql);
 		List <User> userList = q.getResultList();
 		return userList;
+	}
+	
+	@Override
+	@Transactional
+	public void registerUser(User u)
+	{
+		System.out.println("insert dao layer");
+		em.persist(u);
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean loginUser(String email, String password) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -18,5 +18,20 @@ public class UserServiceImpl implements UserService{
 		
 		return dao.getAllUsers();
 	}
+	@Override
+	public void registerUser(User u) {
+		dao.registerUser(u);
+		
+	}
+	@Override
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public boolean loginUser(String email, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
