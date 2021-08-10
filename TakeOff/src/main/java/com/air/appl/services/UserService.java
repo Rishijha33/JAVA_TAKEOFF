@@ -7,6 +7,7 @@ import com.air.appl.beans.User;
 public interface UserService {
 	public List<User> getAllUsers();
 	public void registerUser(User u);
-	public User getUserByEmail(String email);
+	public String getUserByEmail(String email, String password);
 	public boolean loginUser(String email, String password);
+	public User getUserById(int id);
 }
