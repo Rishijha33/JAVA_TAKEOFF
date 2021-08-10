@@ -1,0 +1,29 @@
+package com.air.appl.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.air.appl.beans.User;
+
+import com.air.appl.services.UserServiceImpl;
+
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/api/v1")
+public class UserController {
+	
+	@Autowired
+	private UserServiceImpl service;
+	
+	//http://localhost:8090/api/v/users
+	@GetMapping("/users")
+	public List<User> getUserList()
+	{
+		return service.getAllUsers();
+	}
+}
