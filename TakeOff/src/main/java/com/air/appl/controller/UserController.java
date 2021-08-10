@@ -29,7 +29,7 @@ public class UserController {
 		return service.getAllUsers();
 	}
 	
-	
+	//http://localhost:8090/api/v1/addnewuser
 	@PostMapping("/addnewuser")
 	public String registerUser(@RequestBody User u)
 	{
