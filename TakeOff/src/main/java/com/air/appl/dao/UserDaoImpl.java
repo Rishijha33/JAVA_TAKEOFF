@@ -32,7 +32,6 @@ public class UserDaoImpl implements UserDao{
 	@Transactional
 	public void registerUser(User u)
 	{
-		System.out.println("insert dao layer");
 		em.persist(u);
 	}
 
