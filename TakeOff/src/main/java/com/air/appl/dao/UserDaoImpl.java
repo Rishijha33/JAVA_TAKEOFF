@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -36,15 +37,52 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public User getUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public String getUserByEmail(String email,String password) {
+		String sql = "SELECT u FROM User u where u.email= :email";
+		TypedQuery<User> tq = em.createQuery(sql, User.class);
+		tq.setParameter("email", email);
+		User user=tq.getSingleResult();
+		if(user!=null)
+		{
+			user.setPassword(password);
+			em.merge(user);
+			return "Password updated";
+		}
+		else
+		{
+			return "Something went wrong";
+		}
 	}
 
 	@Override
 	public boolean loginUser(String email, String password) {
 		// TODO Auto-generated method stub
-		return false;
+		System.out.println(email);
+		System.out.println(password);
+		String sql = "SELECT u FROM User u where u.email= :email AND u.password= :password";
+		TypedQuery<User> tq = em.createQuery(sql, User.class);
+		tq.setParameter("email", email);
+		tq.setParameter("password", password);
+		User u=tq.getSingleResult();
+		/*
+		 * System.out.println(u.getEmail()); System.out.println(u.getPassword());
+		 */
+		if(u!=null)
+		{
+		return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public User getUserById(int id) {
+		// TODO Auto-generated method stub
+		User u = em.find(User.class, id);
+		return u;
 	}
 
 }
