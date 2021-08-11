@@ -28,7 +28,9 @@ public class AdminDaoImpl implements AdminDao {
 		String sql= "SELECT f FROM Flight f";
 		Query q = em.createQuery(sql);
 		List <Flight> flightList = q.getResultList();
+		//heo
 		return flightList;
+		
 	}
 
 
