@@ -41,6 +41,10 @@ public class Booking {
 	
 	@Column (name = "REFUND_AMOUNT")
 	private long refundAmount;
+	
+	@Column (name = "REFUND_AMOUNT1")
+	private long refundAmount1;
+	
 
 	public Booking() {
 		super();
@@ -131,6 +135,8 @@ public class Booking {
 	public void setRefundAmount(long refundAmount) {
 		this.refundAmount = refundAmount;
 	}
+	
+	
 
 	@Override
 	public String toString() {
