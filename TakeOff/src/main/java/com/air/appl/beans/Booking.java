@@ -1,37 +1,45 @@
 package com.air.appl.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Bookings")
-public class Booking {
-
+public class Booking implements Serializable{
+	
+	private static final long SerialVersionUID= 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name = "BOOKING_ID")
 	private int bookingId;
 	
-	@Column (name = "USER_ID")
-	private int userId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="userId")
+	private User user;
 	
-	@Column (name = "FLIGHT_ID")
-	private int flightId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="flightId")
+	private Flight flight;
 	
 	@Column (name = "SEAT_TYPE")
 	private String seatType;
 	
 	@Column (name = "BOOKING_DATETIME")
-	private Date bookingDT = new Date();
+	private Date bookingDate = new Date();
 	
 	@Column (name = "BOOKING_STATUS")
-	private boolean bookingStatus;
+	private String bookingStatus;
 	
 	@Column (name = "NO_OF_PASSENGERS")
 	private int noOfPassengers;
@@ -42,21 +50,18 @@ public class Booking {
 	@Column (name = "REFUND_AMOUNT")
 	private long refundAmount;
 	
-	
-	@Column (name = "REFUND_AMOUNT2")
-	private long refundAmount2;
 	public Booking() {
 		super();
 	}
 
-	public Booking(int bookingId, int userId, int flightId, String seatType, Date bookingDT, boolean bookingStatus,
+	public Booking(int bookingId, User user, Flight flight, String seatType, Date bookingDate, String bookingStatus,
 			int noOfPassengers, long totalCost, long refundAmount) {
 		super();
 		this.bookingId = bookingId;
-		this.userId = userId;
-		this.flightId = flightId;
+		this.user = user;
+		this.flight = flight;
 		this.seatType = seatType;
-		this.bookingDT = bookingDT;
+		this.bookingDate = bookingDate;
 		this.bookingStatus = bookingStatus;
 		this.noOfPassengers = noOfPassengers;
 		this.totalCost = totalCost;
@@ -71,20 +76,20 @@ public class Booking {
 		this.bookingId = bookingId;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public int getFlightId() {
-		return flightId;
+	public Flight getFlight() {
+		return flight;
 	}
 
-	public void setFlightId(int flightId) {
-		this.flightId = flightId;
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
 
 	public String getSeatType() {
@@ -95,19 +100,19 @@ public class Booking {
 		this.seatType = seatType;
 	}
 
-	public Date getBookingDT() {
-		return bookingDT;
+	public Date getBookingDate() {
+		return bookingDate;
 	}
 
-	public void setBookingDT(Date bookingDT) {
-		this.bookingDT = bookingDT;
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
-	public boolean isBookingStatus() {
+	public String getBookingStatus() {
 		return bookingStatus;
 	}
 
-	public void setBookingStatus(boolean bookingStatus) {
+	public void setBookingStatus(String bookingStatus) {
 		this.bookingStatus = bookingStatus;
 	}
 
@@ -134,16 +139,14 @@ public class Booking {
 	public void setRefundAmount(long refundAmount) {
 		this.refundAmount = refundAmount;
 	}
-	
-	
 
 	@Override
 	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", userId=" + userId + ", flightId=" + flightId + ", seatType="
-				+ seatType + ", bookingDT=" + bookingDT + ", bookingStatus=" + bookingStatus + ", noOfPassengers="
+		return "Booking [bookingId=" + bookingId + ", user=" + user + ", flight=" + flight + ", seatType=" + seatType
+				+ ", bookingDate=" + bookingDate + ", bookingStatus=" + bookingStatus + ", noOfPassengers="
 				+ noOfPassengers + ", totalCost=" + totalCost + ", refundAmount=" + refundAmount + "]";
 	}
+
 	
-	
-	
+
 }
