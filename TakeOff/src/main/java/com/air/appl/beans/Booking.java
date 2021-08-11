@@ -42,8 +42,6 @@ public class Booking {
 	@Column (name = "REFUND_AMOUNT")
 	private long refundAmount;
 	
-	@Column (name = "REFUND_AMOUNT1")
-	private long refundAmount1;
 	
 	@Column (name = "REFUND_AMOUNT2")
 	private long refundAmount2;
