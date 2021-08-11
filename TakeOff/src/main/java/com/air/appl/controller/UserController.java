@@ -20,7 +20,7 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl service;
 	
-	//http://localhost:8090/api/v/users
+	//http://localhost:8090/api/v1/users
 	@GetMapping("/users")
 	public List<User> getUserList()
 	{

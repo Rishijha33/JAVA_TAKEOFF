@@ -18,8 +18,6 @@ public class Admin {
 	@Column (name = "PASSWORD")
 	private String password;
 	
-	@Column(name="Name")
-	private String Name;
 
 	public Admin() {
 		super();
