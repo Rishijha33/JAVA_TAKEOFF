@@ -31,7 +31,7 @@ public class UserController {
 		return service.getAllUsers();
 	}
 	
-	
+	//http://localhost:8090/api/v1/addnewuser
 	@PostMapping("/addnewuser")
 	public String registerUser(@RequestBody User u)
 	{
@@ -41,7 +41,7 @@ public class UserController {
 	
 	//http://localhost:8090/api/v1/users/{email}/{password}
 	@GetMapping(path = "/users/{email}/{password}" , produces = "application/json")
-	public boolean loginUser(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
+	public User loginUser(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
 	{
 		return service.loginUser(email,password);
 	}

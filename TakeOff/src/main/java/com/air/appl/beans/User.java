@@ -1,9 +1,12 @@
 package com.air.appl.beans;
 
+import java.sql.Date;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 
 @Entity
 @Table(name = "Users")
@@ -34,8 +37,8 @@ public class User {
 	private long phoneNumber;
 	
 	
-//	@Column (name = "DOB")
-//	private Date dob = new Date();
+	@Column (name = "DOB")
+	private Date  dob ;
 
 
 	public User() {
@@ -44,7 +47,7 @@ public class User {
 
 
 	public User(int userId, String email, String password, String title, String firstName, String lastName,
-			long phoneNumber) {
+			long phoneNumber,Date dob) {
 		super();
 		this.userId = userId;
 		this.email = email;
@@ -53,7 +56,7 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
-		//this.dob = dob;
+		this.dob = dob;
 	}
 
 
@@ -127,14 +130,15 @@ public class User {
 	}
 
 
-//	public Date getDob() {
-//		return dob;
-//	}
-//
-//
-//	public void setDob(Date dob) {
-//		this.dob = dob;
-//	}
+public Date getDob() {
+	return dob;
+}
+
+
+
+public void setDob(Date dob) {
+		this.dob = dob;
+	}
 
 
 	@Override
