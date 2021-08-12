@@ -40,7 +40,7 @@ public class UserController {
 	}
 	
 	@GetMapping(path = "/users/{email}/{password}" , produces = "application/json")
-	public boolean loginUser(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
+	public User loginUser(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
 	{
 		return service.loginUser(email,password);
 	}

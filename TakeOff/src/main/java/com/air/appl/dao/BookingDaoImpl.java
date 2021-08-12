@@ -1,5 +1,7 @@
 package com.air.appl.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -31,13 +33,32 @@ public class BookingDaoImpl implements BookingDao {
 
 	@Override
 	public List<Flight> searchFlight(String source, String destination) {
-		String sql = "SELECT f FROM Flight f where f.source= :source and f.destination= :destination";
+		//Date d = new SimpleDateFormat("dd-MMM-yyyy").parse(date);
+		
+		String sql = "SELECT f FROM Flight f where f.source= :source and f.destination= :destination ";
 		TypedQuery<Flight> tq = em.createQuery(sql, Flight.class);
 		tq.setParameter("source", source);
 		tq.setParameter("destination", destination);
+		//tq.setParameter("departure", departure);
 		List<Flight> myFlights = tq.getResultList();
+		for (Flight f : myFlights)
+		{
+			 String ts = f.getDeparture().toString();
+			 try {
+				Date d = new SimpleDateFormat("yyyy-MM-dd").parse(ts);
+				
+				System.out.println(d);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+		}
 		return myFlights;
 	}
+
+
+
 
 
 	

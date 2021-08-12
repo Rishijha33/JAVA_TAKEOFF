@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean loginUser(String email, String password) {
+	public User loginUser(String email, String password) {
 		// TODO Auto-generated method stub
 		return dao.loginUser(email, password);
 	}

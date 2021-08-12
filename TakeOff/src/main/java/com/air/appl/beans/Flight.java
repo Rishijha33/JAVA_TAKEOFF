@@ -1,5 +1,6 @@
 package com.air.appl.beans;
 
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -32,6 +33,8 @@ public class Flight {
 	
 	@Column (name = "DEPARTURE")
 	private Date departure = new Date();
+	
+
 	
 	@Column (name = "ARRIVAL")
 	private Date arrival = new Date();
