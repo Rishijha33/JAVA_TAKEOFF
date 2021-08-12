@@ -24,10 +24,15 @@ public class BookingServiceImpl implements BookingService{
 
 
 	@Override
-	public List<Flight> searchFlight(String source, String destination) {
+	public List<Flight> searchFlight(String source, String destination, Date departureDate, String travelClass) {
 		// TODO Auto-generated method stub
-		return dao.searchFlight(source, destination);
+		return dao.searchFlight(source, destination, departureDate, travelClass);
 	}
+
+
+	
+
+	
 
 
 	

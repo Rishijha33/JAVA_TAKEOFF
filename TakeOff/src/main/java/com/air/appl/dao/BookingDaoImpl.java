@@ -1,5 +1,6 @@
 package com.air.appl.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,15 +31,59 @@ public class BookingDaoImpl implements BookingDao {
 
 
 	@Override
-	public List<Flight> searchFlight(String source, String destination) {
-		String sql = "SELECT f FROM Flight f where f.source= :source and f.destination= :destination";
+	public List<Flight> searchFlight(String source, String destination, Date departureDate, String travelClass) {
+		int e1 , e2, b1,b2;
+		List<Flight> myFlightList = new ArrayList<Flight>();
+		String sql = "SELECT f FROM Flight f where f.source= :source and f.destination= :destination and f.departureDate=:departureDate";
 		TypedQuery<Flight> tq = em.createQuery(sql, Flight.class);
 		tq.setParameter("source", source);
 		tq.setParameter("destination", destination);
+		tq.setParameter("departureDate", departureDate);
+//		tq.setParameter("travelClass", travelClass);
 		List<Flight> myFlights = tq.getResultList();
-		return myFlights;
+		
+		if(travelClass=="Economy")
+		{
+			for(Flight f:myFlights) {
+				 e1= f.getEconomicSeats();
+				 e2=f.geteSeatsBooked();
+				if(e1==e2)
+				{
+					return null;
+				}
+				else
+				{
+					
+					myFlightList.add(f);
+				}
+			}
+			return myFlightList;
+		}
+		else
+		{
+			for(Flight f:myFlights) {
+				 b1= f.getBusinessSeats();
+				 b2=f.getbSeatsBooked();
+				if(b1==b2)
+				{
+					return null;
+				}
+				else
+				{
+					
+					myFlightList.add(f);
+				}
+			}
+			return myFlightList;
+		}
+		
 	}
+	
 
+
+
+
+	
 
 	
 }

@@ -50,12 +50,29 @@ public class Booking implements Serializable{
 	@Column (name = "REFUND_AMOUNT")
 	private long refundAmount;
 	
+	@Column(name="TRAVEL_CLASS")
+	private String travelClass;
+	
 	public Booking() {
 		super();
 	}
 
+	
+
+	public String getTravelClass() {
+		return travelClass;
+	}
+
+
+
+	public void setTravelClass(String travelClass) {
+		this.travelClass = travelClass;
+	}
+
+
+
 	public Booking(int bookingId, User user, Flight flight, String seatType, Date bookingDate, String bookingStatus,
-			int noOfPassengers, long totalCost, long refundAmount) {
+			int noOfPassengers, long totalCost, long refundAmount, String travelClass) {
 		super();
 		this.bookingId = bookingId;
 		this.user = user;
@@ -66,7 +83,10 @@ public class Booking implements Serializable{
 		this.noOfPassengers = noOfPassengers;
 		this.totalCost = totalCost;
 		this.refundAmount = refundAmount;
+		this.travelClass = travelClass;
 	}
+
+
 
 	public int getBookingId() {
 		return bookingId;
@@ -140,12 +160,17 @@ public class Booking implements Serializable{
 		this.refundAmount = refundAmount;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Booking [bookingId=" + bookingId + ", user=" + user + ", flight=" + flight + ", seatType=" + seatType
 				+ ", bookingDate=" + bookingDate + ", bookingStatus=" + bookingStatus + ", noOfPassengers="
-				+ noOfPassengers + ", totalCost=" + totalCost + ", refundAmount=" + refundAmount + "]";
+				+ noOfPassengers + ", totalCost=" + totalCost + ", refundAmount=" + refundAmount + ", travelClass="
+				+ travelClass + "]";
 	}
+
+	
 
 	
 
