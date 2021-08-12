@@ -39,6 +39,7 @@ public class UserController {
 		return "Record added";
 	}
 	
+	//http://localhost:8090/api/v1/users/{email}/{password}
 	@GetMapping(path = "/users/{email}/{password}" , produces = "application/json")
 	public boolean loginUser(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
 	{
