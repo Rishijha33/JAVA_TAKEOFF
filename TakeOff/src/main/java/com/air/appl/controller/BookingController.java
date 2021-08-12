@@ -1,10 +1,7 @@
 package com.air.appl.controller;
 
-<<<<<<< HEAD
 import java.util.Date;
-=======
-import java.sql.Date;
->>>>>>> branch 'main' of https://github.com/Rishijha33/JAVA_TAKEOFF.git
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
