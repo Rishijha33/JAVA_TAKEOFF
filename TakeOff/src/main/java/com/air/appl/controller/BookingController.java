@@ -1,6 +1,10 @@
 package com.air.appl.controller;
 
+<<<<<<< HEAD
 import java.util.Date;
+=======
+import java.sql.Date;
+>>>>>>> branch 'main' of https://github.com/Rishijha33/JAVA_TAKEOFF.git
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +28,11 @@ public class BookingController {
 	@Autowired
 	private BookingService service;
 	
-	//http://localhost:8090/api/v1/users/Pune/Mumbai
-	@GetMapping(path="/{source}/{destination}" , produces = "application/json")
-	public List<Flight> getFlightList(@PathVariable(value="source") String source, @PathVariable(value="destination") String destination)
+	//http://localhost:8090/api/v1/Pune/Mumbai/
+	@GetMapping(path="/{source}/{destination}/{departureDate}/{travelClass}" , produces = "application/json")
+	public List<Flight> getFlightList(@PathVariable(value="source") String source, @PathVariable(value="destination") String destination, @PathVariable(value="departureDate") Date departureDate, @PathVariable(value="travelClass")String travelClass)
 	{
-		return service.searchFlight(source, destination);
+		return service.searchFlight(source, destination, departureDate, travelClass);
 	}
 
 }
