@@ -1,12 +1,8 @@
 package com.air.appl.beans;
 
-
-<<<<<<< HEAD
-import java.util.Date;
-=======
 import java.sql.Date;
 import java.sql.Time;
->>>>>>> branch 'main' of https://github.com/Rishijha33/JAVA_TAKEOFF.git
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,15 +35,15 @@ public class Flight {
 	@Column (name = "DEPARTURE_DATE")
 	private Date departureDate;
 	
-<<<<<<< HEAD
+
 
 	
 	@Column (name = "ARRIVAL")
-	private Date arrival = new Date();
-=======
+	private Date arrival ;
+
 	@Column (name = "DEPARTURE_TIME")
 	private String departureTime;
->>>>>>> branch 'main' of https://github.com/Rishijha33/JAVA_TAKEOFF.git
+
 	
 	
 	@Column (name = "ARRIVAL_DATE")
