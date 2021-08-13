@@ -10,7 +10,9 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.air.appl.beans.Booking;
 import com.air.appl.beans.Flight;
 import com.air.appl.beans.User;
 
@@ -79,8 +81,13 @@ public class BookingDaoImpl implements BookingDao {
 		
 	}
 	
-
-
+	@Transactional
+	@Override
+	public Booking addBooking(Booking b) {
+		System.out.println("DAO--Booking"+ b);
+		em.persist(b);
+		return b;
+	}
 
 
 	

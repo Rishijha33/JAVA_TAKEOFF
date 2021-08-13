@@ -1,7 +1,7 @@
 package com.air.appl.beans;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +36,7 @@ public class Booking implements Serializable{
 	private String seatType;
 	
 	@Column (name = "BOOKING_DATETIME")
-	private Date bookingDate = new Date();
+	private Date bookingDate;
 	
 	@Column (name = "BOOKING_STATUS")
 	private String bookingStatus;

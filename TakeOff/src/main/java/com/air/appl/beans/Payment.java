@@ -21,7 +21,7 @@ public class Payment {
 	@Column (name = "TRANSACTION_ID")
 	private int transactionId;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="bookingId")
 	private Booking booking;
 	

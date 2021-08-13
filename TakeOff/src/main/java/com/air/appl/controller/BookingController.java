@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.air.appl.beans.Booking;
 import com.air.appl.beans.Flight;
 import com.air.appl.beans.User;
 import com.air.appl.services.BookingService;
@@ -31,4 +34,10 @@ public class BookingController {
 		return service.searchFlight(source, destination, departureDate, travelClass);
 	}
 
+	
+	@PostMapping("/addBooking")
+	public Booking addBooking(@RequestBody Booking b)
+	{
+		return service.addBooking(b);
+	}
 }
