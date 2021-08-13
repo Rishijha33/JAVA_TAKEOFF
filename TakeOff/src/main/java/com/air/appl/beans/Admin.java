@@ -1,4 +1,5 @@
 package com.air.appl.beans;
+
 import javax.persistence.*;
 
 
@@ -17,6 +18,8 @@ public class Admin {
 	
 	@Column (name = "PASSWORD")
 	private String password;
+	
+
 	
 
 	public Admin() {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.air.appl.beans.Admin;
 import com.air.appl.beans.Flight;
 import com.air.appl.beans.User;
 import com.air.appl.dao.AdminDao;
@@ -31,7 +32,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public boolean loginAdmin(String email, String password) {
+	public Admin loginAdmin(String email, String password) {
 		
 		return dao.loginAdmin(email, password);
 	}

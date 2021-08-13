@@ -55,36 +55,34 @@ public class UserDaoImpl implements UserDao{
 		}
 	}
 
-	
+	@Override
+	public User loginUser(String email, String password) {
+		// TODO Auto-generated method stub
+		System.out.println(email);
+		System.out.println(password);
+		String sql = "SELECT u FROM User u where u.email= :email AND u.password= :password";
+		TypedQuery<User> tq = em.createQuery(sql, User.class);
+		tq.setParameter("email", email);
+		tq.setParameter("password", password);
+		User u=tq.getSingleResult();
+		/*
+		 * System.out.println(u.getEmail()); System.out.println(u.getPassword());
+		 */
+		if(u!=null)
+		{
+		return u;
+		}
+		else
+		{
+			return null;
+		}
+	}
 
 	@Override
 	public User getUserById(int id) {
 		// TODO Auto-generated method stub
 		User u = em.find(User.class, id);
 		return u;
-	}
-
-	@Override
-	public User loginUser(String email, String password) {
-		// TODO Auto-generated method stub
-				System.out.println(email);
-				System.out.println(password);
-				String sql = "SELECT u FROM User u where u.email= :email AND u.password= :password";
-				TypedQuery<User> tq = em.createQuery(sql, User.class);
-				tq.setParameter("email", email);
-				tq.setParameter("password", password);
-				User u=tq.getSingleResult();
-				/*
-				 * System.out.println(u.getEmail()); System.out.println(u.getPassword());
-				 */
-				if(u!=null)
-				{
-				return u;
-				}
-				else
-				{
-					return null;
-				}
 	}
 
 }
