@@ -46,12 +46,14 @@ public class UserController {
 		return service.loginUser(email,password);
 	}
 	
+	//http://localhost:8090/api/v1/users/{id}
 	@GetMapping(path = "/users/{id}" , produces = "application/json")
 	public User getUserById(@PathVariable(value="id")int userid)
 	{
 		return service.getUserById(userid);
 	}
 	
+	//http://localhost:8090/api/v1/updateuser
 	@PutMapping(path = "/updateuser")
 	public String updatePassword(@RequestBody User user)
 	{

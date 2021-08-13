@@ -1,15 +1,15 @@
 package com.air.appl.beans;
 
-import java.util.Date;
 
+import java.sql.Date;
 import java.sql.Time;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -17,8 +17,9 @@ import javax.persistence.Table;
 public class Flight {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name = "FLIGHT_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FLIGHT_SEQ")
+	@SequenceGenerator(sequenceName = "flight_id_generation", allocationSize=1, name = "FLIGHT_SEQ")
 	private int flightId;
 	
 	@Column (name = "ADMIN_ID")
@@ -36,15 +37,8 @@ public class Flight {
 	@Column (name = "DEPARTURE_DATE")
 	private Date departureDate;
 	
-
-
-	
-	@Column (name = "ARRIVAL")
-	private Date arrival = new Date();
-
 	@Column (name = "DEPARTURE_TIME")
 	private String departureTime;
-
 	
 	
 	@Column (name = "ARRIVAL_DATE")
@@ -295,4 +289,3 @@ public class Flight {
 	
 	
 }
-	

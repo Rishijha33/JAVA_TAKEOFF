@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -20,8 +21,9 @@ public class Booking implements Serializable{
 	private static final long SerialVersionUID= 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name = "BOOKING_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOOKING_SEQ")
+	@SequenceGenerator(sequenceName = "booking_id_generation", allocationSize=1, name = "BOOKING_SEQ")
 	private int bookingId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
