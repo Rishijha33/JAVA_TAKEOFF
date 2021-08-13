@@ -23,7 +23,7 @@ public class Payment {
 	@SequenceGenerator(sequenceName = "transaction_id_generation", allocationSize=1, name = "PAYMENT_SEQ")
 	private int transactionId;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="bookingId")
 	private Booking booking;
 	

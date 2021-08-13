@@ -58,7 +58,7 @@ public class AdminDaoImpl implements AdminDao {
 		
 	}
 	
-	public boolean loginAdmin(String email, String password) {
+	public Admin loginAdmin(String email, String password) {
 		// TODO Auto-generated method stub
 		System.out.println(email);
 		System.out.println(password);
@@ -66,17 +66,14 @@ public class AdminDaoImpl implements AdminDao {
 		TypedQuery<Admin> tq = em.createQuery(sql, Admin.class);
 		tq.setParameter("email", email);
 		tq.setParameter("password", password);
-		Admin a=tq.getSingleResult();
-		/*
-		 * System.out.println(u.getEmail()); System.out.println(u.getPassword());
-		 */
-		if(a!=null)
+		Admin admin=tq.getSingleResult();
+		if(admin!=null)
 		{
-		return true;
+		return admin;
 		}
 		else
 		{
-			return false;
+			return null;
 		}
 	}
 

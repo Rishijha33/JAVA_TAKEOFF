@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.air.appl.beans.Booking;
 import com.air.appl.beans.Flight;
 import com.air.appl.dao.BookingDao;
 
@@ -27,6 +28,12 @@ public class BookingServiceImpl implements BookingService{
 	public List<Flight> searchFlight(String source, String destination, Date departureDate, String travelClass) {
 		// TODO Auto-generated method stub
 		return dao.searchFlight(source, destination, departureDate, travelClass);
+	}
+
+
+	@Override
+	public Booking addBooking(Booking b) {
+		return dao.addBooking(b);
 	}
 
 

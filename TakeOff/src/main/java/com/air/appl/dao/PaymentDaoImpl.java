@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.air.appl.beans.Payment;
 
@@ -15,7 +16,7 @@ public class PaymentDaoImpl implements PaymentDao {
 	@PersistenceContext
 	private EntityManager em;
 	
-	
+	@Transactional
 	@Override
 	public Payment payBill(Payment p) {
 		System.out.println("DAO--Payment"+ p);
