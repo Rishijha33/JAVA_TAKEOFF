@@ -1,8 +1,8 @@
 package com.air.appl.beans;
 
+
 import java.sql.Date;
 import java.sql.Time;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,15 +35,8 @@ public class Flight {
 	@Column (name = "DEPARTURE_DATE")
 	private Date departureDate;
 	
-
-
-	
-	@Column (name = "ARRIVAL")
-	private Date arrival ;
-
 	@Column (name = "DEPARTURE_TIME")
 	private String departureTime;
-
 	
 	
 	@Column (name = "ARRIVAL_DATE")
@@ -294,4 +287,3 @@ public class Flight {
 	
 	
 }
-	
