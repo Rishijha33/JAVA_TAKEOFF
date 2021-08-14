@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.air.appl.beans.Booking;
 import com.air.appl.beans.Flight;
+import com.air.appl.beans.User;
+import com.air.appl.beans.sFlight;
 import com.air.appl.dao.BookingDao;
 
 @Service("bookingService")
@@ -24,17 +26,41 @@ public class BookingServiceImpl implements BookingService{
 	}
 
 
-	@Override
-	public List<Flight> searchFlight(String source, String destination, Date departureDate, String travelClass) {
-		// TODO Auto-generated method stub
-		return dao.searchFlight(source, destination, departureDate, travelClass);
-	}
+//	@Override
+//	public List<Flight> searchFlight(String source, String destination, Date departureDate, String travelClass) {
+//		// TODO Auto-generated method stub
+//		return dao.searchFlight(source, destination, departureDate, travelClass);
+//	}
 
 
 	@Override
 	public Booking addBooking(Booking b) {
 		return dao.addBooking(b);
 	}
+
+
+@Override
+public List<Flight> searchFlight(sFlight sf) {
+	// TODO Auto-generated method stub
+	return dao.searchFlight(sf);
+}
+
+
+@Override
+public long addBookings(Booking b, String travelClass, int flightId, int userId) {
+	// TODO Auto-generated method stub
+	return dao.addBookings(b, travelClass, flightId, userId);
+}
+
+
+
+
+
+
+
+
+
+
 
 
 	

@@ -1,5 +1,10 @@
 package com.air.appl.dao;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.air.appl.beans.Booking;
 import com.air.appl.beans.Flight;
 import com.air.appl.beans.User;
+import com.air.appl.beans.sFlight;
 
 @Repository("bookingDao") 	
 @EnableTransactionManagement
@@ -31,56 +37,91 @@ public class BookingDaoImpl implements BookingDao {
 		return null;
 	}
 
-
+	@Transactional
 	@Override
-	public List<Flight> searchFlight(String source, String destination, Date departureDate, String travelClass) {
+	public List<Flight> searchFlight(sFlight sf) {
 		int e1 , e2, b1,b2;
+		
+		Date departureDate1=null;
+		String source= sf.getSource();
+		String destination=sf.getDestination();
+		String departureDate = sf.getDepartureDate();
+		String travelClass = sf.getTravelClass();
+		System.out.println(travelClass);
+		int tc = travelClass.length();
+		System.out.println(tc);
+		//String travelClass = "economy";
+		
+		
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+//		Date departureDate=null;
+		try {
+			
+			departureDate1 = simpleDateFormat.parse(departureDate);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		List<Flight> myFlightList = new ArrayList<Flight>();
 		String sql = "SELECT f FROM Flight f where f.source= :source and f.destination= :destination and f.departureDate=:departureDate";
 		TypedQuery<Flight> tq = em.createQuery(sql, Flight.class);
 		tq.setParameter("source", source);
 		tq.setParameter("destination", destination);
-		tq.setParameter("departureDate", departureDate);
+		tq.setParameter("departureDate", departureDate1);
 //		tq.setParameter("travelClass", travelClass);
 		List<Flight> myFlights = tq.getResultList();
 		
-		if(travelClass=="Economy")
+		if(tc==7)
 		{
 			for(Flight f:myFlights) {
 				 e1= f.getEconomicSeats();
 				 e2=f.geteSeatsBooked();
 				if(e1==e2)
 				{
-					return null;
+					System.out.println("in economy--in if");;
 				}
 				else
 				{
-					
+					System.out.println("is it working??");
 					myFlightList.add(f);
 				}
 			}
+			System.out.println("hii" + myFlightList);
 			return myFlightList;
 		}
-		else
+		else if(tc==8)
 		{
 			for(Flight f:myFlights) {
 				 b1= f.getBusinessSeats();
+				 System.out.println(b1);
 				 b2=f.getbSeatsBooked();
+				 System.out.println(b2);
 				if(b1==b2)
 				{
-					return null;
+					System.out.println("Inside iffff------");
+					continue;
+					
 				}
 				else
 				{
 					
 					myFlightList.add(f);
+					System.out.println("listttttT********" + myFlightList);
 				}
 			}
+		
 			return myFlightList;
+		}
+		else 
+		{
+			return null;
 		}
 		
 	}
-	
 
 	@Transactional
 	@Override
@@ -89,6 +130,57 @@ public class BookingDaoImpl implements BookingDao {
 		em.persist(b);
 		return b;
 	}
+
+	@Override
+	public long addBookings(Booking b, String travelClass, int flightId, int userId) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		Date date = new Date();
+//		System.out.println(dateFormat.format(date));
+//		
+//	    Date date1=Date.valueOf(date);//converting string into sql date  
+//	    System.out.println(date);  
+		
+		
+//		String travelClass = sf.getTravelClass();
+		int passengers = b.getNoOfPassengers();
+		int tc = travelClass.length();
+		Flight flight = em.find(Flight.class, flightId);
+		User user=em.find(User.class, userId);
+		b.setFlight(flight);
+		b.setUser(user);
+		long bCost = b.getFlight().getBusinessCost();
+		long eCost = b.getFlight().getEconomyCost();
+		long totalCost ;
+		System.out.println(tc);
+		if(tc==7)
+		{
+			totalCost = b.getNoOfPassengers()*eCost;
+			
+		}
+		else if(tc==8)
+		{
+			totalCost = b.getNoOfPassengers()*bCost;
+			
+		}
+		else 
+		{
+			return 0;
+		}
+//		b.setTotalCost(totalCost);
+//		b.setBookingStatus("not confirmed");
+//		b.setBookingDate(null);
+//		b.setSeatType(travelClass);
+//		b.setTravelClass(travelClass);
+//		b.setRefundAmount(0);
+		em.persist(b);
+		
+		return 0;
+	}
+
+	
+	
+
+	
 
 
 }
