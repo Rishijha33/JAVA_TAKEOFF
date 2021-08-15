@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -22,50 +23,47 @@ import com.air.appl.beans.Flight;
 import com.air.appl.beans.User;
 import com.air.appl.beans.sFlight;
 
-@Repository("bookingDao") 	
+@Repository("bookingDao")
 @EnableTransactionManagement
 public class BookingDaoImpl implements BookingDao {
 
 	@PersistenceContext
 	private EntityManager em;
-	
-	
+
 	@Override
 	public String cancelBooking(int bookingId) {
-		
-		
+
 		return null;
 	}
 
 	@Transactional
 	@Override
 	public List<Flight> searchFlight(sFlight sf) {
-		int e1 , e2, b1,b2;
-		
-		Date departureDate1=null;
-		String source= sf.getSource();
-		String destination=sf.getDestination();
+		int e1, e2, b1, b2;
+
+		Date departureDate1 = null;
+		String source = sf.getSource();
+		String destination = sf.getDestination();
 		String departureDate = sf.getDepartureDate();
 		String travelClass = sf.getTravelClass();
 		System.out.println(travelClass);
 		int tc = travelClass.length();
 		System.out.println(tc);
-		//String travelClass = "economy";
-		
-		
+		// String travelClass = "economy";
+
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
 //		Date departureDate=null;
 		try {
-			
+
 			departureDate1 = simpleDateFormat.parse(departureDate);
-			
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		List<Flight> myFlightList = new ArrayList<Flight>();
 		String sql = "SELECT f FROM Flight f where f.source= :source and f.destination= :destination and f.departureDate=:departureDate";
 		TypedQuery<Flight> tq = em.createQuery(sql, Flight.class);
@@ -74,61 +72,74 @@ public class BookingDaoImpl implements BookingDao {
 		tq.setParameter("departureDate", departureDate1);
 //		tq.setParameter("travelClass", travelClass);
 		List<Flight> myFlights = tq.getResultList();
-		
-		if(tc==7)
-		{
-			for(Flight f:myFlights) {
-				 e1= f.getEconomicSeats();
-				 e2=f.geteSeatsBooked();
-				if(e1==e2)
-				{
-					System.out.println("in economy--in if");;
-				}
-				else
-				{
+
+		if (tc == 7) {
+			for (Flight f : myFlights) {
+				e1 = f.getEconomicSeats();
+				e2 = f.geteSeatsBooked();
+				if (e1 == e2) {
+					System.out.println("in economy--in if");
+					;
+				} else {
 					System.out.println("is it working??");
 					myFlightList.add(f);
 				}
 			}
 			System.out.println("hii" + myFlightList);
 			return myFlightList;
-		}
-		else if(tc==8)
-		{
-			for(Flight f:myFlights) {
-				 b1= f.getBusinessSeats();
-				 System.out.println(b1);
-				 b2=f.getbSeatsBooked();
-				 System.out.println(b2);
-				if(b1==b2)
-				{
+		} else if (tc == 8) {
+			for (Flight f : myFlights) {
+				b1 = f.getBusinessSeats();
+				System.out.println(b1);
+				b2 = f.getbSeatsBooked();
+				System.out.println(b2);
+				if (b1 == b2) {
 					System.out.println("Inside iffff------");
 					continue;
-					
-				}
-				else
-				{
-					
+
+				} else {
+
 					myFlightList.add(f);
 					System.out.println("listttttT********" + myFlightList);
 				}
 			}
-		
+
 			return myFlightList;
-		}
-		else 
-		{
+		} else {
 			return null;
 		}
-		
+
 	}
 
 	@Transactional
 	@Override
 	public Booking addBooking(Booking b) {
-		System.out.println("DAO--Booking"+ b);
-		em.persist(b);
-		return b;
+		long totalCost;
+		System.out.println("DAO--Booking" + b);
+		int fId = b.getFlight().getFlightId();
+		String query = "Select f from Flight f where f.flightId =:fId ";
+		TypedQuery<Flight> tq = em.createQuery(query, Flight.class);
+		tq.setParameter("fId", fId);
+		Flight f = tq.getSingleResult();
+		System.out.println(f.getEconomyCost());
+		System.out.println(b.getNoOfPassengers());
+
+		int tcLen = b.getTravelClass().length();
+
+		if (tcLen == 7) {
+			totalCost = f.getEconomyCost() * b.getNoOfPassengers();
+			b.setTotalCost(totalCost);
+			em.persist(b);
+			return b;
+		} else if (tcLen == 8) {
+			totalCost = f.getBusinessCost() * b.getNoOfPassengers();
+			b.setTotalCost(totalCost);
+			em.persist(b);
+			return b;
+
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -139,31 +150,25 @@ public class BookingDaoImpl implements BookingDao {
 //		
 //	    Date date1=Date.valueOf(date);//converting string into sql date  
 //	    System.out.println(date);  
-		
-		
+
 //		String travelClass = sf.getTravelClass();
 		int passengers = b.getNoOfPassengers();
 		int tc = travelClass.length();
 		Flight flight = em.find(Flight.class, flightId);
-		User user=em.find(User.class, userId);
+		User user = em.find(User.class, userId);
 		b.setFlight(flight);
 		b.setUser(user);
 		long bCost = b.getFlight().getBusinessCost();
 		long eCost = b.getFlight().getEconomyCost();
-		long totalCost ;
+		long totalCost;
 		System.out.println(tc);
-		if(tc==7)
-		{
-			totalCost = b.getNoOfPassengers()*eCost;
-			
-		}
-		else if(tc==8)
-		{
-			totalCost = b.getNoOfPassengers()*bCost;
-			
-		}
-		else 
-		{
+		if (tc == 7) {
+			totalCost = b.getNoOfPassengers() * eCost;
+
+		} else if (tc == 8) {
+			totalCost = b.getNoOfPassengers() * bCost;
+
+		} else {
 			return 0;
 		}
 //		b.setTotalCost(totalCost);
@@ -173,14 +178,8 @@ public class BookingDaoImpl implements BookingDao {
 //		b.setTravelClass(travelClass);
 //		b.setRefundAmount(0);
 		em.persist(b);
-		
+
 		return 0;
 	}
-
-	
-	
-
-	
-
 
 }
