@@ -142,44 +142,6 @@ public class BookingDaoImpl implements BookingDao {
 		}
 	}
 
-	@Override
-	public long addBookings(Booking b, String travelClass, int flightId, int userId) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//		Date date = new Date();
-//		System.out.println(dateFormat.format(date));
-//		
-//	    Date date1=Date.valueOf(date);//converting string into sql date  
-//	    System.out.println(date);  
 
-//		String travelClass = sf.getTravelClass();
-		int passengers = b.getNoOfPassengers();
-		int tc = travelClass.length();
-		Flight flight = em.find(Flight.class, flightId);
-		User user = em.find(User.class, userId);
-		b.setFlight(flight);
-		b.setUser(user);
-		long bCost = b.getFlight().getBusinessCost();
-		long eCost = b.getFlight().getEconomyCost();
-		long totalCost;
-		System.out.println(tc);
-		if (tc == 7) {
-			totalCost = b.getNoOfPassengers() * eCost;
-
-		} else if (tc == 8) {
-			totalCost = b.getNoOfPassengers() * bCost;
-
-		} else {
-			return 0;
-		}
-//		b.setTotalCost(totalCost);
-//		b.setBookingStatus("not confirmed");
-//		b.setBookingDate(null);
-//		b.setSeatType(travelClass);
-//		b.setTravelClass(travelClass);
-//		b.setRefundAmount(0);
-		em.persist(b);
-
-		return 0;
-	}
 
 }

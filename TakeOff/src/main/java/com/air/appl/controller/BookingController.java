@@ -30,24 +30,7 @@ public class BookingController {
 	
 	@Autowired
 	private BookingService service;
-	
-	//http://localhost:8090/api/v1/Pune/Mumbai/
-//	@GetMapping(path="/{source}/{destination}/{departureDate}/{travelClass}" , produces = "application/json")
-//	public List<Flight> getFlightList(@PathVariable(value="source") String source, @PathVariable(value="destination") String destination, @PathVariable(value="departureDate") Date departureDate, @PathVariable(value="travelClass")String travelClass)
-//	{
-//		return service.searchFlight(source, destination, departureDate, travelClass);
-//	}
-	
-//	
-//	@GetMapping(path="/{source}/{destination}/{departureDate}/{travelClass}" , produces = "application/json")
-//	public List<Flight> getFlightList(@RequestParam("source") String source, @RequestParam("destination") String destination, @RequestParam("departureDate") Date departureDate, @RequestParam("travelClass")String travelClass)
-//	{
-//		return service.searchFlight(source, destination, departureDate, travelClass);
-//	}
-//	
 
-
-	
 	@PostMapping("/addBooking")
 	public Booking addBooking(@RequestBody Booking b)
 	{
@@ -60,11 +43,7 @@ public class BookingController {
 		return service.searchFlight(sf);
 	}
 	
-	@PostMapping("/addBookings/{flightId}/{userId}/{travelClass}")
-	public long addBookings(@PathVariable int flightId, @PathVariable int userId, @PathVariable String travelClass, @RequestBody Booking b)
-	{
-		return service.addBookings(b, travelClass, flightId, userId);
-	}
+
 	
 	
 }

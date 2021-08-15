@@ -46,11 +46,11 @@ public List<Flight> searchFlight(sFlight sf) {
 }
 
 
-@Override
-public long addBookings(Booking b, String travelClass, int flightId, int userId) {
-	// TODO Auto-generated method stub
-	return dao.addBookings(b, travelClass, flightId, userId);
-}
+//@Override
+//public long addBookings(Booking b, String travelClass, int flightId, int userId) {
+//	// TODO Auto-generated method stub
+//	return dao.addBookings(b, travelClass, flightId, userId);
+//}
 
 
 

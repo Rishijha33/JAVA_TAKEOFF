@@ -15,6 +15,6 @@ public interface BookingService {
 
 	public String cancelBooking(int bookingId);
 	public Booking addBooking(Booking b);
-	public long addBookings(Booking b,String travelClass, int flightId, int userId);
+	//public long addBookings(Booking b,String travelClass, int flightId, int userId);
 
 }
