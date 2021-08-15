@@ -1,6 +1,8 @@
 package com.air.appl.beans;
 
-import java.util.Date;
+
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,13 +32,20 @@ public class Flight {
 	@Column (name = "DESTINATION")
 	private String destination;
 	
-	@Column (name = "DEPARTURE")
-	private Date departure = new Date();
+	@Column (name = "DEPARTURE_DATE")
+	private Date departureDate;
 	
-	@Column (name = "ARRIVAL")
-	private Date arrival = new Date();
+	@Column (name = "DEPARTURE_TIME")
+	private String departureTime;
 	
 	
+	@Column (name = "ARRIVAL_DATE")
+	private Date arrivalDate;
+	
+	@Column (name = "ARRIVAL_TIME")
+	private String arrivalTime;
+
+
 	@Column (name = "ECONOMIC_SEATS")
 	private int economicSeats;
 	
@@ -60,17 +69,201 @@ public class Flight {
 		super();
 	}
 
-	public Flight(int flightId, int adminId, String flightName, String source, String destination, Date departure,
-			Date arrival, int economicSeats, int businessSeats, long economyCost, long businessCost, int eSeatsBooked,
-			int bSeatsBooked) {
+	
+
+	public int getFlightId() {
+		return flightId;
+	}
+
+
+
+	public void setFlightId(int flightId) {
+		this.flightId = flightId;
+	}
+
+
+
+	public int getAdminId() {
+		return adminId;
+	}
+
+
+
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
+	}
+
+
+
+	public String getFlightName() {
+		return flightName;
+	}
+
+
+
+	public void setFlightName(String flightName) {
+		this.flightName = flightName;
+	}
+
+
+
+	public String getSource() {
+		return source;
+	}
+
+
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+
+
+	public String getDestination() {
+		return destination;
+	}
+
+
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+
+
+	public Date getDepartureDate() {
+		return departureDate;
+	}
+
+
+
+	public void setDepartureDate(Date departureDate) {
+		this.departureDate = departureDate;
+	}
+
+
+
+	public String getDepartureTime() {
+		return departureTime;
+	}
+
+
+
+	public void setDepartureTime(String departureTime) {
+		this.departureTime = departureTime;
+	}
+
+
+
+	public Date getArrivalDate() {
+		return arrivalDate;
+	}
+
+
+
+	public void setArrivalDate(Date arrivalDate) {
+		this.arrivalDate = arrivalDate;
+	}
+
+
+
+	public String getArrivalTime() {
+		return arrivalTime;
+	}
+
+
+
+	public void setArrivalTime(String arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+
+
+	public int getEconomicSeats() {
+		return economicSeats;
+	}
+
+
+
+	public void setEconomicSeats(int economicSeats) {
+		this.economicSeats = economicSeats;
+	}
+
+
+
+	public int getBusinessSeats() {
+		return businessSeats;
+	}
+
+
+
+	public void setBusinessSeats(int businessSeats) {
+		this.businessSeats = businessSeats;
+	}
+
+
+
+	public long getEconomyCost() {
+		return economyCost;
+	}
+
+
+
+	public void setEconomyCost(long economyCost) {
+		this.economyCost = economyCost;
+	}
+
+
+
+	public long getBusinessCost() {
+		return businessCost;
+	}
+
+
+
+	public void setBusinessCost(long businessCost) {
+		this.businessCost = businessCost;
+	}
+
+
+
+	public int geteSeatsBooked() {
+		return eSeatsBooked;
+	}
+
+
+
+	public void seteSeatsBooked(int eSeatsBooked) {
+		this.eSeatsBooked = eSeatsBooked;
+	}
+
+
+
+	public int getbSeatsBooked() {
+		return bSeatsBooked;
+	}
+
+
+
+	public void setbSeatsBooked(int bSeatsBooked) {
+		this.bSeatsBooked = bSeatsBooked;
+	}
+
+
+
+	public Flight(int flightId, int adminId, String flightName, String source, String destination, Date departureDate,
+			String departureTime, Date arrivalDate, String arrivalTime, int economicSeats, int businessSeats,
+			long economyCost, long businessCost, int eSeatsBooked, int bSeatsBooked) {
 		super();
 		this.flightId = flightId;
 		this.adminId = adminId;
 		this.flightName = flightName;
 		this.source = source;
 		this.destination = destination;
-		this.departure = departure;
-		this.arrival = arrival;
+		this.departureDate = departureDate;
+		this.departureTime = departureTime;
+		this.arrivalDate = arrivalDate;
+		this.arrivalTime = arrivalTime;
 		this.economicSeats = economicSeats;
 		this.businessSeats = businessSeats;
 		this.economyCost = economyCost;
@@ -79,112 +272,17 @@ public class Flight {
 		this.bSeatsBooked = bSeatsBooked;
 	}
 
-	public int getFlightId() {
-		return flightId;
-	}
 
-	public void setFlightId(int flightId) {
-		this.flightId = flightId;
-	}
 
-	public int getAdminId() {
-		return adminId;
+	@Override
+	public String toString() {
+		return "Flight [flightId=" + flightId + ", adminId=" + adminId + ", flightName=" + flightName + ", source="
+				+ source + ", destination=" + destination + ", departureDate=" + departureDate + ", departureTime="
+				+ departureTime + ", arrivalDate=" + arrivalDate + ", arrivalTime=" + arrivalTime + ", economicSeats="
+				+ economicSeats + ", businessSeats=" + businessSeats + ", economyCost=" + economyCost
+				+ ", businessCost=" + businessCost + ", eSeatsBooked=" + eSeatsBooked + ", bSeatsBooked=" + bSeatsBooked
+				+ "]";
 	}
-
-	public void setAdminId(int adminId) {
-		this.adminId = adminId;
-	}
-
-	public String getFlightName() {
-		return flightName;
-	}
-
-	public void setFlightName(String flightName) {
-		this.flightName = flightName;
-	}
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
-
-	public String getDestination() {
-		return destination;
-	}
-
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-
-	public Date getDeparture() {
-		return departure;
-	}
-
-	public void setDeparture(Date departure) {
-		this.departure = departure;
-	}
-
-	public Date getArrival() {
-		return arrival;
-	}
-
-	public void setArrival(Date arrival) {
-		this.arrival = arrival;
-	}
-
-	public int getEconomicSeats() {
-		return economicSeats;
-	}
-
-	public void setEconomicSeats(int economicSeats) {
-		this.economicSeats = economicSeats;
-	}
-
-	public int getBusinessSeats() {
-		return businessSeats;
-	}
-
-	public void setBusinessSeats(int businessSeats) {
-		this.businessSeats = businessSeats;
-	}
-
-	public long getEconomyCost() {
-		return economyCost;
-	}
-
-	public void setEconomyCost(long economyCost) {
-		this.economyCost = economyCost;
-	}
-
-	public long getBusinessCost() {
-		return businessCost;
-	}
-
-	public void setBusinessCost(long businessCost) {
-		this.businessCost = businessCost;
-	}
-
-	public int geteSeatsBooked() {
-		return eSeatsBooked;
-	}
-
-	public void seteSeatsBooked(int eSeatsBooked) {
-		this.eSeatsBooked = eSeatsBooked;
-	}
-
-	public int getbSeatsBooked() {
-		return bSeatsBooked;
-	}
-
-	public void setbSeatsBooked(int bSeatsBooked) {
-		this.bSeatsBooked = bSeatsBooked;
-	}
-	
-	
-	
 	
 	
 	

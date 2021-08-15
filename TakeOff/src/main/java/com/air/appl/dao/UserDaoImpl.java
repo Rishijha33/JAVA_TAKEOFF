@@ -56,7 +56,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public boolean loginUser(String email, String password) {
+	public User loginUser(String email, String password) {
 		// TODO Auto-generated method stub
 		System.out.println(email);
 		System.out.println(password);
@@ -70,11 +70,11 @@ public class UserDaoImpl implements UserDao{
 		 */
 		if(u!=null)
 		{
-		return true;
+		return u;
 		}
 		else
 		{
-			return false;
+			return null;
 		}
 	}
 
