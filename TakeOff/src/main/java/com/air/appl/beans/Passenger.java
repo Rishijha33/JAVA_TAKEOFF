@@ -1,5 +1,7 @@
 package com.air.appl.beans;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,10 +13,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import javassist.SerialVersionUID;
+
 @Entity
 @Table(name = "Passengers")
 public class Passenger {
-
+	
 	
 	@Id
 	@Column (name = "PASSENGER_ID")

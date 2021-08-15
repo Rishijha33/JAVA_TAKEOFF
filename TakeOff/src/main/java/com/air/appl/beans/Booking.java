@@ -16,9 +16,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Bookings")
-public class Booking implements Serializable{
+public class Booking {
 	
-	private static final long SerialVersionUID= 1L;
+
 	
 	@Id
 	@Column (name = "BOOKING_ID")

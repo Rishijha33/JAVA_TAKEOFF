@@ -22,12 +22,15 @@ public class PassengerDaoImpl implements PassengerDao {
 	@Transactional
 	@Override
 	public Passenger addPassenger(Passenger p) {
-		int bId = p.getBooking().getBookingId();
-		String query = "Select b from Booking b where b.bookingId =:bId ";
-		TypedQuery<Booking> tq = em.createQuery(query, Booking.class);
-		tq.setParameter("bId", bId);
-		Booking b = tq.getSingleResult();
-		System.out.println("feffefefeff" + p);
+//		int bId = p.getBooking().getBookingId();
+//		String query = "Select b from Booking b where b.bookingId =:bId ";
+//		TypedQuery<Booking> tq = em.createQuery(query, Booking.class);
+//		tq.setParameter("bId", bId);
+//		Booking b = tq.getSingleResult();
+//		System.out.println("feffefefeff" + p);
+//		p.setBooking(b);
+		
+		System.out.println(p);
 		em.persist(p);
 		System.out.println("persisted" + p);
 		return p;
