@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -17,11 +18,12 @@ import javax.persistence.Table;
 public class Payment {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name = "TRANSACTION_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PAYMENT_SEQ")
+	@SequenceGenerator(sequenceName = "transaction_id_generation", allocationSize=1, name = "PAYMENT_SEQ")
 	private int transactionId;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="bookingId")
 	private Booking booking;
 	

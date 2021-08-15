@@ -11,24 +11,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Bookings")
-public class Booking implements Serializable{
+public class Booking {
 	
-	private static final long SerialVersionUID= 1L;
+
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name = "BOOKING_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOOKING_SEQ")
+	@SequenceGenerator(sequenceName = "booking_id_generation", allocationSize=1, name = "BOOKING_SEQ")
 	private int bookingId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="userId")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="flightId")
 	private Flight flight;
 	
@@ -37,7 +39,7 @@ public class Booking implements Serializable{
 	
 	@Column (name = "BOOKING_DATETIME")
 	private Date bookingDate ;
-	
+
 	@Column (name = "BOOKING_STATUS")
 	private String bookingStatus;
 	

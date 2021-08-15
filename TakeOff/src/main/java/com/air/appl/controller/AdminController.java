@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.air.appl.beans.Admin;
 import com.air.appl.beans.Flight;
 import com.air.appl.beans.User;
 import com.air.appl.services.AdminServiceImpl;
@@ -45,7 +46,7 @@ public class AdminController {
 	
 	
 	@GetMapping(path = "/admin/{email}/{password}" , produces = "application/json")
-	public boolean loginAdmin(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
+	public Admin loginAdmin(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
 	{
 		return service.loginAdmin(email,password);
 	}

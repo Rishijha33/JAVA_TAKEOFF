@@ -1,3 +1,4 @@
+
 package com.air.appl.beans;
 
 
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +18,9 @@ import javax.persistence.Table;
 public class Flight {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name = "FLIGHT_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FLIGHT_SEQ")
+	@SequenceGenerator(sequenceName = "flight_id_generation", allocationSize=1, name = "FLIGHT_SEQ")
 	private int flightId;
 	
 	@Column (name = "ADMIN_ID")
@@ -285,5 +288,5 @@ public class Flight {
 	}
 	
 	
-	
+
 }

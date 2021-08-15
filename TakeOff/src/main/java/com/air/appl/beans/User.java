@@ -14,8 +14,9 @@ public class User {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column (name = "USER_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
+	@SequenceGenerator(sequenceName = "user_id_generation", allocationSize=1, name = "USER_SEQ")
 	private int userId;
 	
 	@Column (name = "EMAIL")

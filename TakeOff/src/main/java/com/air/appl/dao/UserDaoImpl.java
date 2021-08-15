@@ -33,6 +33,7 @@ public class UserDaoImpl implements UserDao{
 	@Transactional
 	public void registerUser(User u)
 	{
+//		String name = u.getFirstName();
 		em.persist(u);
 	}
 

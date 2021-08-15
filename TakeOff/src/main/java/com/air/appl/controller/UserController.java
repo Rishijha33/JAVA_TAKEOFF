@@ -39,18 +39,21 @@ public class UserController {
 		return "Record added";
 	}
 	
+	//http://localhost:8090/api/v1/users/{email}/{password}
 	@GetMapping(path = "/users/{email}/{password}" , produces = "application/json")
 	public User loginUser(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
 	{
 		return service.loginUser(email,password);
 	}
 	
+	//http://localhost:8090/api/v1/users/{id}
 	@GetMapping(path = "/users/{id}" , produces = "application/json")
 	public User getUserById(@PathVariable(value="id")int userid)
 	{
 		return service.getUserById(userid);
 	}
 	
+	//http://localhost:8090/api/v1/updateuser
 	@PutMapping(path = "/updateuser")
 	public String updatePassword(@RequestBody User user)
 	{
