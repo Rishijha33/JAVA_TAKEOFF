@@ -170,22 +170,33 @@ public class BookingDaoImpl implements BookingDao {
 		System.out.println(p.getTransactionId());
 		em.remove(p);
 		
-		TypedQuery<Flight> tq2 = em.createQuery("Select b.Flight FROM Booking b WHERE b.bookingId= " +b.getBookingId(), Flight.class);
+		TypedQuery<Flight> tq2 = em.createQuery("Select b.flight FROM Booking b WHERE b.bookingId= " +b.getBookingId(), Flight.class);
 		Flight f  = tq2.getSingleResult();
 		int eSeats = f.geteSeatsBooked();
 		int bSeats = f.getbSeatsBooked();
+		long refundECost= f.getEconomyCost();
+		long refundBCost = f.getBusinessCost();
 		
 		// removing booked seats from the flight table
 		if (tc == 7)
 		{
 			eSeats = eSeats - noPass;
 			f.seteSeatsBooked(eSeats);
+			refundECost= refundECost/10;
+			b.setRefundAmount(refundECost);
+			b.setBookingStatus("Refunded");
 			em.merge(f);
+			em.merge(b);
 		}
 		else	if (tc == 8)
 		{
 			bSeats = bSeats - noPass;
+			
 			f.setbSeatsBooked(bSeats);
+			refundBCost=refundBCost/10;
+			b.setRefundAmount(refundBCost);
+			b.setBookingStatus("Refunded");		
+			em.merge(b);
 			em.merge(f);
 		}
 		
@@ -199,15 +210,11 @@ public class BookingDaoImpl implements BookingDao {
 		}
 		
 		
-		em.remove(b);
-		if(b!=null)
-		{
-			return "Record Deleted";
-		}
-		else
-		{
-			return "not deleted";
-		}
+//		em.remove(b);
+		
+			return "Booking Cancelled & Amount Refunded";
+		
+		
 	}
 
 
