@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.air.appl.beans.Admin;
 import com.air.appl.beans.Booking;
 import com.air.appl.beans.Flight;
+import com.air.appl.beans.Passenger;
+import com.air.appl.beans.Payment;
 import com.air.appl.beans.User;
 import com.air.appl.beans.sFlight;
 
@@ -154,10 +156,49 @@ public class BookingDaoImpl implements BookingDao {
 		return bookingList;
 	}
 
+	
 	@Transactional
 	@Override
 	public String deleteBooking(int bookingId) {
+		
 		Booking b = em.find(Booking.class, bookingId);
+		int noPass = b.getNoOfPassengers();
+		int tc = b.getTravelClass().length();
+		
+		TypedQuery<Payment> tq = em.createQuery("Select p FROM Payment p WHERE p.booking = " +b.getBookingId(), Payment.class);
+		Payment p = tq.getSingleResult();
+		System.out.println(p.getTransactionId());
+		em.remove(p);
+		
+		TypedQuery<Flight> tq2 = em.createQuery("Select b.Flight FROM Booking b WHERE b.bookingId= " +b.getBookingId(), Flight.class);
+		Flight f  = tq2.getSingleResult();
+		int eSeats = f.geteSeatsBooked();
+		int bSeats = f.getbSeatsBooked();
+		
+		// removing booked seats from the flight table
+		if (tc == 7)
+		{
+			eSeats = eSeats - noPass;
+			f.seteSeatsBooked(eSeats);
+			em.merge(f);
+		}
+		else	if (tc == 8)
+		{
+			bSeats = bSeats - noPass;
+			f.setbSeatsBooked(bSeats);
+			em.merge(f);
+		}
+		
+		
+		TypedQuery<Passenger> tq1 = em.createQuery("Select p FROM Passenger p WHERE p.booking = " +b.getBookingId(), Passenger.class);
+		List <Passenger> passList = tq1.getResultList();
+		for (Passenger ps : passList)
+		{
+			System.out.println(ps.getPassengerId());
+			em.remove(ps);
+		}
+		
+		
 		em.remove(b);
 		if(b!=null)
 		{

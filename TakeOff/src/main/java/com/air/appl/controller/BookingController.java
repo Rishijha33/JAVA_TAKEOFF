@@ -49,7 +49,6 @@ public class BookingController {
 	{
 		return service.viewBooking(userId);
 	}
-	
 
 	@DeleteMapping("/bookingdelete/{id}")
 	public String deleteBooking(@PathVariable(value="id") int bookingId) 
