@@ -23,7 +23,7 @@ public class Booking {
 	@Id
 	@Column (name = "BOOKING_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOOKING_SEQ")
-	@SequenceGenerator(sequenceName = "booking_id_generation", allocationSize=1, name = "BOOKING_SEQ")
+	@SequenceGenerator(sequenceName = "bookingid_seq", allocationSize=1, name = "BOOKING_SEQ")
 	private int bookingId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -34,11 +34,6 @@ public class Booking {
 	@JoinColumn(name="flightId")
 	private Flight flight;
 	
-	@Column (name = "SEAT_TYPE")
-	private String seatType;
-	
-	@Column (name = "BOOKING_DATETIME")
-	private Date bookingDate ;
 
 	@Column (name = "BOOKING_STATUS")
 	private String bookingStatus;
@@ -73,14 +68,12 @@ public class Booking {
 
 
 
-	public Booking(int bookingId, User user, Flight flight, String seatType, Date bookingDate, String bookingStatus,
+	public Booking(int bookingId, User user, Flight flight, Date bookingDate, String bookingStatus,
 			int noOfPassengers, long totalCost, long refundAmount, String travelClass) {
 		super();
 		this.bookingId = bookingId;
 		this.user = user;
 		this.flight = flight;
-		this.seatType = seatType;
-		this.bookingDate = bookingDate;
 		this.bookingStatus = bookingStatus;
 		this.noOfPassengers = noOfPassengers;
 		this.totalCost = totalCost;
@@ -114,21 +107,6 @@ public class Booking {
 		this.flight = flight;
 	}
 
-	public String getSeatType() {
-		return seatType;
-	}
-
-	public void setSeatType(String seatType) {
-		this.seatType = seatType;
-	}
-
-	public Date getBookingDate() {
-		return bookingDate;
-	}
-
-	public void setBookingDate(Date bookingDate) {
-		this.bookingDate = bookingDate;
-	}
 
 	public String getBookingStatus() {
 		return bookingStatus;
@@ -166,13 +144,12 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", user=" + user + ", flight=" + flight + ", seatType=" + seatType
-				+ ", bookingDate=" + bookingDate + ", bookingStatus=" + bookingStatus + ", noOfPassengers="
-				+ noOfPassengers + ", totalCost=" + totalCost + ", refundAmount=" + refundAmount + ", travelClass="
-				+ travelClass + "]";
+		return "Booking [bookingId=" + bookingId + ", user=" + user + ", flight=" + flight + ", bookingStatus="
+				+ bookingStatus + ", noOfPassengers=" + noOfPassengers + ", totalCost=" + totalCost + ", refundAmount="
+				+ refundAmount + ", travelClass=" + travelClass + "]";
 	}
 
-	
+
 
 	
 

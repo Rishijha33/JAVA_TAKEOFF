@@ -22,8 +22,8 @@ public class Passenger {
 	
 	@Id
 	@Column (name = "PASSENGER_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@SequenceGenerator(sequenceName = "passenger_id_generation", allocationSize=1, name = "PASSENGER_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PASSENGER_SEQ")
+	@SequenceGenerator(sequenceName = "passengerid_seq", allocationSize=1, name = "PASSENGER_SEQ")
 	private int passengerId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

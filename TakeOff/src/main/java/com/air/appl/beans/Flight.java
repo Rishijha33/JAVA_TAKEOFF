@@ -20,11 +20,9 @@ public class Flight {
 	@Id
 	@Column (name = "FLIGHT_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FLIGHT_SEQ")
-	@SequenceGenerator(sequenceName = "flight_id_generation", allocationSize=1, name = "FLIGHT_SEQ")
+	@SequenceGenerator(sequenceName = "flightid_seq", allocationSize=1, name = "FLIGHT_SEQ")
 	private int flightId;
 	
-	@Column (name = "ADMIN_ID")
-	private int adminId;
 	
 	@Column (name = "FLIGHT_NAME")
 	private String flightName;
@@ -83,19 +81,6 @@ public class Flight {
 	public void setFlightId(int flightId) {
 		this.flightId = flightId;
 	}
-
-
-
-	public int getAdminId() {
-		return adminId;
-	}
-
-
-
-	public void setAdminId(int adminId) {
-		this.adminId = adminId;
-	}
-
 
 
 	public String getFlightName() {
@@ -254,12 +239,11 @@ public class Flight {
 
 
 
-	public Flight(int flightId, int adminId, String flightName, String source, String destination, Date departureDate,
+	public Flight(int flightId, String flightName, String source, String destination, Date departureDate,
 			String departureTime, Date arrivalDate, String arrivalTime, int economicSeats, int businessSeats,
 			long economyCost, long businessCost, int eSeatsBooked, int bSeatsBooked) {
 		super();
 		this.flightId = flightId;
-		this.adminId = adminId;
 		this.flightName = flightName;
 		this.source = source;
 		this.destination = destination;
@@ -279,14 +263,15 @@ public class Flight {
 
 	@Override
 	public String toString() {
-		return "Flight [flightId=" + flightId + ", adminId=" + adminId + ", flightName=" + flightName + ", source="
-				+ source + ", destination=" + destination + ", departureDate=" + departureDate + ", departureTime="
-				+ departureTime + ", arrivalDate=" + arrivalDate + ", arrivalTime=" + arrivalTime + ", economicSeats="
-				+ economicSeats + ", businessSeats=" + businessSeats + ", economyCost=" + economyCost
-				+ ", businessCost=" + businessCost + ", eSeatsBooked=" + eSeatsBooked + ", bSeatsBooked=" + bSeatsBooked
-				+ "]";
+		return "Flight [flightId=" + flightId + ", flightName=" + flightName + ", source=" + source + ", destination="
+				+ destination + ", departureDate=" + departureDate + ", departureTime=" + departureTime
+				+ ", arrivalDate=" + arrivalDate + ", arrivalTime=" + arrivalTime + ", economicSeats=" + economicSeats
+				+ ", businessSeats=" + businessSeats + ", economyCost=" + economyCost + ", businessCost=" + businessCost
+				+ ", eSeatsBooked=" + eSeatsBooked + ", bSeatsBooked=" + bSeatsBooked + "]";
 	}
-	
+
+
+
 	
 
 }
