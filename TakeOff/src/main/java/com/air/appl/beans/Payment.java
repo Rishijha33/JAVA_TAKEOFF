@@ -20,7 +20,7 @@ public class Payment {
 	@Id
 	@Column (name = "TRANSACTION_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PAYMENT_SEQ")
-	@SequenceGenerator(sequenceName = "transaction_id_generation", allocationSize=1, name = "PAYMENT_SEQ")
+	@SequenceGenerator(sequenceName = "transactionid_seq", allocationSize=1, name = "PAYMENT_SEQ")
 	private int transactionId;
 	
 	@OneToOne(fetch = FetchType.EAGER)
