@@ -16,9 +16,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Bookings")
-public class Booking implements Serializable{
+public class Booking {
 	
-	private static final long SerialVersionUID= 1L;
+
 	
 	@Id
 	@Column (name = "BOOKING_ID")
@@ -26,11 +26,11 @@ public class Booking implements Serializable{
 	@SequenceGenerator(sequenceName = "booking_id_generation", allocationSize=1, name = "BOOKING_SEQ")
 	private int bookingId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="userId")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="flightId")
 	private Flight flight;
 	
@@ -38,8 +38,8 @@ public class Booking implements Serializable{
 	private String seatType;
 	
 	@Column (name = "BOOKING_DATETIME")
-	private Date bookingDate;
-	
+	private Date bookingDate ;
+
 	@Column (name = "BOOKING_STATUS")
 	private String bookingStatus;
 	

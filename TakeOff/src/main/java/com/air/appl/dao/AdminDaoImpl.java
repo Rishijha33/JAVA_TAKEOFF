@@ -97,7 +97,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Transactional
 	@Override
-	public Flight addFlight(Flight f){
+	public Flight addFlight(Flight f) {
 		em.persist(f);
 		return f;
 	}

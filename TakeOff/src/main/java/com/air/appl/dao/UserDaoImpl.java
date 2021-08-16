@@ -32,6 +32,15 @@ public class UserDaoImpl implements UserDao {
 		return userList;
 	}
 
+//	@Override
+//	@Transactional
+//	public void registerUser(User u)
+//	{
+////		String name = u.getFirstName();
+//		em.persist(u);
+//	}
+
+
 	@Override
 	@Transactional
 	public User registerUser(User user) throws UserAlreadyExistsException {

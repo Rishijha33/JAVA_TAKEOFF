@@ -1,5 +1,7 @@
 package com.air.appl.beans;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,18 +13,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import javassist.SerialVersionUID;
+
 @Entity
 @Table(name = "Passengers")
 public class Passenger {
-
+	
 	
 	@Id
 	@Column (name = "PASSENGER_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PASSENGER_SEQ")
-	@SequenceGenerator(sequenceName = "passenger_id_generation", allocationSize=1, name = "PASSENGER_SEQ")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@SequenceGenerator(sequenceName = "passenger_id_generation", allocationSize=1, name = "PASSENGER_SEQ")
 	private int passengerId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="bookingId")
 	private Booking booking;
 	
@@ -34,6 +38,7 @@ public class Passenger {
 	
 	@Column (name = "GENDER")
 	private String gender;
+	
 	
 	@Column (name = "SEAT_NO")
 	private int seatNo;
