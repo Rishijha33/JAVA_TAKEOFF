@@ -25,12 +25,9 @@ public class BookingDaoImpl implements BookingDao {
 	
 	
 	@Override
-	public String cancelBooking(int bookingId) {
-		
-		
+	public String cancelBooking(int bookingId) {		
 		return null;
 	}
-
 
 	@Override
 	public List<Flight> searchFlight(String source, String destination, Date departureDate, String travelClass) {

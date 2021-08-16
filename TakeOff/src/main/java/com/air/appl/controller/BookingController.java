@@ -35,12 +35,12 @@ public class BookingController {
 		return service.searchFlight(source, destination, departureDate, travelClass);
 	}
 
-
-	
 	@PostMapping("/addBooking")
 	public Booking addBooking(@RequestBody Booking b)
 	{
 		return service.addBooking(b);
 	}
+	
+	
 }
 

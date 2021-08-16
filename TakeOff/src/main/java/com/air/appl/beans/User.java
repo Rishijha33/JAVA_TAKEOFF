@@ -11,12 +11,12 @@ import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 @Entity
 @Table(name = "Users")
 public class User {
-	
+	//"user_id_generation"
 	
 	@Id
 	@Column (name = "USER_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
-	@SequenceGenerator(sequenceName = "user_id_generation", allocationSize=1, name = "USER_SEQ")
+	@SequenceGenerator(sequenceName = "new_seq", allocationSize=1, name = "USER_SEQ")
 	private int userId;
 	
 	@Column (name = "EMAIL")
