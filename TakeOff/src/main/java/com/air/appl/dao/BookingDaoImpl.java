@@ -184,13 +184,14 @@ public class BookingDaoImpl implements BookingDao {
 		int bSeats = f.getbSeatsBooked();
 		long refundECost= f.getEconomyCost();
 		long refundBCost = f.getBusinessCost();
+		long totalCost = b.getTotalCost();
 		
 		// removing booked seats from the flight table
 		if (tc == 7)
 		{
 			eSeats = eSeats - noPass;
 			f.seteSeatsBooked(eSeats);
-			refundECost= refundECost/10;
+			refundECost= totalCost/10;
 			b.setRefundAmount(refundECost);
 			b.setBookingStatus("Refunded");
 			em.merge(f);
@@ -201,7 +202,7 @@ public class BookingDaoImpl implements BookingDao {
 			bSeats = bSeats - noPass;
 			
 			f.setbSeatsBooked(bSeats);
-			refundBCost=refundBCost/10;
+			refundBCost=totalCost/10;
 			b.setRefundAmount(refundBCost);
 			b.setBookingStatus("Refunded");		
 			em.merge(b);
@@ -218,7 +219,7 @@ public class BookingDaoImpl implements BookingDao {
 		}
 		
 		
-//		em.remove(b);
+	        em.remove(b);
 		
 			return "Booking Cancelled & Amount Refunded";
 		
