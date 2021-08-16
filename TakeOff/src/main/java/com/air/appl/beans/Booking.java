@@ -23,7 +23,7 @@ public class Booking {
 	@Id
 	@Column (name = "BOOKING_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOOKING_SEQ")
-	@SequenceGenerator(sequenceName = "booking_id_generation", allocationSize=1, name = "BOOKING_SEQ")
+	@SequenceGenerator(sequenceName = "bookingid_seq", allocationSize=1, name = "BOOKING_SEQ")
 	private int bookingId;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

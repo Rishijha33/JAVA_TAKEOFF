@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.air.appl.beans.Admin;
 import com.air.appl.beans.Flight;
 import com.air.appl.beans.User;
+import com.air.appl.exception.AdminNotFoundException;
+import com.air.appl.exception.FlightNotFoundException;
+import com.air.appl.exception.UserAlreadyExistsException;
+import com.air.appl.exception.UserNotFoundException;
 
 @Repository("adminDao")
 @EnableTransactionManagement
@@ -28,37 +32,51 @@ public class AdminDaoImpl implements AdminDao {
 		String sql= "SELECT f FROM Flight f";
 		Query q = em.createQuery(sql);
 		List <Flight> flightList = q.getResultList();
-		//heo
 		return flightList;
 		
 	}
 
-
 	@Override
-	public Flight getFlightById(int flightId) {
+	public Flight getFlightById(int flightId) throws FlightNotFoundException{
 			// TODO Auto-generated method stub
-			Flight f = em.find(Flight.class, flightId);
-			return f;
-		
-
+			/*
+			 * Flight f = em.find(Flight.class, flightId); return f;
+			 */
+		String sql = "SELECT f FROM Flight f where f.flightId= :flightId";
+		TypedQuery<Flight> tq = em.createQuery(sql, Flight.class);
+		tq.setParameter("flightId", flightId );
+		try
+		{
+			Flight flight=tq.getSingleResult();
+			return flight;
+		}
+		catch(Exception e)
+		{
+			throw new FlightNotFoundException("No such flight exists");
+		}
 	}
 	@Override
 	@Transactional
-	public String deleteFlightbyId(int flightId) {
-		Flight f = em.find(Flight.class, flightId);
-		em.remove(f);
-		if(f!=null)
+	public String deleteFlightbyId(int flightId) throws FlightNotFoundException{
+		//Flight f = em.find(Flight.class, flightId);
+		//em.remove(f);
+		String sql = "SELECT f FROM Flight f where f.flightId= :flightId";
+		TypedQuery<Flight> tq = em.createQuery(sql, Flight.class);
+		tq.setParameter("flightId", flightId );
+		List<Flight> flights = tq.getResultList();
+		try
 		{
-			return "Record Deleted";
+			Flight flight=tq.getSingleResult();
+			em.remove(flight);
+			return "Flight deleted successfully";
 		}
-		else
+		catch(Exception e)
 		{
-			return "not deleted";
+			throw new FlightNotFoundException("No such flight exists");
 		}
-		
 	}
 	
-	public Admin loginAdmin(String email, String password) {
+	public Admin loginAdmin(String email, String password) throws AdminNotFoundException{
 		// TODO Auto-generated method stub
 		System.out.println(email);
 		System.out.println(password);
@@ -66,14 +84,14 @@ public class AdminDaoImpl implements AdminDao {
 		TypedQuery<Admin> tq = em.createQuery(sql, Admin.class);
 		tq.setParameter("email", email);
 		tq.setParameter("password", password);
-		Admin admin=tq.getSingleResult();
-		if(admin!=null)
+		try
 		{
-		return admin;
+			Admin admin=tq.getSingleResult();
+			return admin;
 		}
-		else
+		catch(Exception e)
 		{
-			return null;
+			throw new AdminNotFoundException("No admin for entered details");
 		}
 	}
 

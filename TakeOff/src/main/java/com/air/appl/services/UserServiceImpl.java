@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.air.appl.beans.User;
 import com.air.appl.dao.UserDao;
+import com.air.appl.exception.UserAlreadyExistsException;
+import com.air.appl.exception.UserNotFoundException;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -17,32 +19,35 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUsers() {
-
-		return dao.getAllUsers();
+		List<User> users=dao.getAllUsers();
+		System.out.println("Data getting from db is: "+users);
+		return users;
 	}
 
 	@Override
-	public void registerUser(User u) {
-		dao.registerUser(u);
-
+	public User registerUser(User u) throws UserAlreadyExistsException {
+		User user=dao.registerUser(u);
+		System.out.println(user);
+		return user;
 	}
 
 	@Override
 	@Transactional
-	public String getUserByEmail(String email, String password) {
-		// TODO Auto-generated method stub
-		return dao.getUserByEmail(email,password);
+	public User updatePassword(String email, String password) throws UserNotFoundException {
+		User user=dao.updatePassword(email, password);
+		System.out.println(user);
+		return user;
 	}
 
 	@Override
-	public User loginUser(String email, String password) {
-		// TODO Auto-generated method stub
-		return dao.loginUser(email, password);
+	public User loginUser(String email, String password) throws UserNotFoundException {
+		User user= dao.loginUser(email, password);
+		System.out.println("Dao: "+user);
+		return user;
 	}
 
 	@Override
-	public User getUserById(int id) {
-		// TODO Auto-generated method stub
+	public User getUserById(int id) throws UserNotFoundException {
 		return dao.getUserById(id);
 	}
 

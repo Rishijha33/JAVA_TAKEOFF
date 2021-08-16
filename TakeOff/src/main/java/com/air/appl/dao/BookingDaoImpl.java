@@ -33,8 +33,16 @@ public class BookingDaoImpl implements BookingDao {
 	@PersistenceContext
 	private EntityManager em;
 
+	
+//	
+//	@Override
+//	public String cancelBooking(int bookingId) {		
+//		return null;
+//	}
+
 
 	@Transactional
+
 	@Override
 	public List<Flight> searchFlight(sFlight sf) {
 		int e1, e2, b1, b2;

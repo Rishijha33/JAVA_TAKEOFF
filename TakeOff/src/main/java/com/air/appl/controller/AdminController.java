@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.air.appl.beans.Admin;
 import com.air.appl.beans.Flight;
 import com.air.appl.beans.User;
+import com.air.appl.exception.AdminNotFoundException;
+import com.air.appl.exception.FlightNotFoundException;
 import com.air.appl.services.AdminServiceImpl;
 import com.air.appl.services.UserServiceImpl;
 
@@ -34,19 +36,19 @@ public class AdminController {
 	}
 	
 	@GetMapping("/flights/{id}")
-	public Flight getFlightById(@PathVariable(value="id") int flightId) {
+	public Flight getFlightById(@PathVariable(value="id") int flightId) throws FlightNotFoundException{
 		return service.findById(flightId);
 	}
 	
 	@DeleteMapping("/flightdelete/{id}")
-	public String deleteFlights(@PathVariable(value="id") int flightId) 
+	public String deleteFlights(@PathVariable(value="id") int flightId) throws FlightNotFoundException
 	{
 		return service.deleteFlight(flightId);
 	}
 	
 	
 	@GetMapping(path = "/admin/{email}/{password}" , produces = "application/json")
-	public Admin loginAdmin(@PathVariable(value="email")String email, @PathVariable(value="password")String password)
+	public Admin loginAdmin(@PathVariable(value="email")String email, @PathVariable(value="password")String password) throws AdminNotFoundException
 	{
 		return service.loginAdmin(email,password);
 	}

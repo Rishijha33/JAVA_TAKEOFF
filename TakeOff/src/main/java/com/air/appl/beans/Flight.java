@@ -20,7 +20,7 @@ public class Flight {
 	@Id
 	@Column (name = "FLIGHT_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FLIGHT_SEQ")
-	@SequenceGenerator(sequenceName = "flight_id_generation", allocationSize=1, name = "FLIGHT_SEQ")
+	@SequenceGenerator(sequenceName = "flightid_seq", allocationSize=1, name = "FLIGHT_SEQ")
 	private int flightId;
 	
 	@Column (name = "ADMIN_ID")
